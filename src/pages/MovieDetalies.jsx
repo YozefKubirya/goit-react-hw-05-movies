@@ -31,18 +31,18 @@ export const MovieDetalies = () => {
       return <div>Loading...</div>;
    }
    const { overview, genres, poster_path, vote_average,title}=movie;
-   const genresPars = movie.genres.map(({ name, id }) => {
+   const genresPars =genres.map(({ name, id }) => {
       const gens = `${name} `;
       return gens;
     });
-    const userScoreNormalized = (movie.vote_average * 10).toFixed()
+    const userScoreNormalized = (vote_average * 10).toFixed()
    return (<> <Link to={location.state?.from ?? '/movie'}>
       Back
    </Link>
       <div>
 
          <div>
-            {/* <img src={ movies.poster_path} alt="Poster" height="500" /> */}
+            <img src={ poster_path} alt="Poster" height="500" />
             <h1>{title}:</h1>
             <p>User Score: {userScoreNormalized} </p>
             <h2>Overview</h2>
