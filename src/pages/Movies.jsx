@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState,useEffect } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom"
 const BASE_URL='https://api.themoviedb.org/3/search/movie?'
-const API_Key='1751ed552758886790b5045f1f278379'
+const API_KEY='1751ed552758886790b5045f1f278379'
 
 const Movies = () => {
   const [query,setQuery]=useState('')
@@ -17,7 +17,7 @@ useEffect(()=>{
   const handleFetch= async value=>{
     try {
       const { data } = await axios.get(
-        `${BASE_URL}api_key=${API_Key}&language=en-US&query=${value}&page=1&include_adult=false`
+        `${BASE_URL}api_key=${API_KEY}&language=en-US&query=${value}&page=1&include_adult=false`
       );
 
       setSearchMovie(data.results);
