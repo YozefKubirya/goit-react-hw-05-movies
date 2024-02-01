@@ -16,19 +16,19 @@ export const MovieDetalies = () => {
             );
             setMovie(data);
          } catch (error) {
-            console.error(error);
+            console.log(error);
          }
       };
 
       if (movieId) {
          handleFetch(movieId);
       } else {
-         console.error("Missing movieId");
+         console.log("Missing movieId");
       }
    }, [movieId]);
 
    if (movie === null) {
-      return <div>Loading...</div>;
+      return ;
    }
    const { overview, genres, poster_path, vote_average,title}=movie;
    const genresPars =genres.map(({ name, id }) => {
