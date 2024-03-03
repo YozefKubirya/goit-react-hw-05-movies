@@ -2,45 +2,49 @@ import axios from "axios";
 
 import { useState, useEffect, Suspense } from "react";
 import { NavLink, Link, Outlet, useLocation, useParams } from "react-router-dom";
-const BASE_URL=`https://api.themoviedb.org/3/movie`;
-const API_KEY=`1751ed552758886790b5045f1f278379`
-
+// const BASE_URL=`https://api.themoviedb.org/3/movie`;
+// const API_KEY=`1751ed552758886790b5045f1f278379`
+const MOVIE_POSTER_LINK = 'https://image.tmdb.org/t/p/w500';
 export const MovieDetalies = () => {
    const [movie, setMovie] = useState(null);
    const location = useLocation();
    const { movieId } = useParams();
 
    useEffect(() => {
-      const handleFetch = async id => {
+    
+      const handleFetch = async (id) => {
          try {
             const { data } = await axios.get(
-               `${BASE_URL}/${id}?api_key=${API_KEY}&language=en-US`
+               `https://api.themoviedb.org/3/movie/${id}?api_key=1751ed552758886790b5045f1f278379&language=en-US`
             );
             setMovie(data);
+          
          } catch (error) {
             console.log(error);
          }
       };
-handleFetch(movieId)
-      
+
+    handleFetch(movieId)
+  
    }, [movieId]);
 
    if (movie === null) {
       return ;
-   }
+   }   
    const { overview, genres, poster_path, vote_average,title}=movie;
    const genresPars =genres.map(({ name }) => {
       const gens = `${name} `;
       return gens;
     });
+
     const userScoreNormalized = (vote_average * 10).toFixed()
-   return (<> <Link to={location.state?.from ?? '/movie'}>
+   return (<> <Link to={location.state?.from ?? '/movies'}>
       Back
    </Link>
       <div>
 
          <div>
-            <img src={poster_path} alt="Poster" height="500" />
+            <img src={MOVIE_POSTER_LINK+poster_path} alt="Poster" height="500" />
             <h1>{title}:</h1>
             <p>User Score: {userScoreNormalized} </p>
             <h2>Overview</h2>
@@ -74,18 +78,3 @@ handleFetch(movieId)
       </div></>);
 };
 export default MovieDetalies;
-// MovieDetalies.propTypes = {
-//    movies: PropTypes.arrayOf(
-//      PropTypes.shape({
-//        poster_path: PropTypes.string.isRequired,
-//        overview: PropTypes.string.isRequired,
-//        vote_average: PropTypes.string.isRequired,
-//        genres: PropTypes.arrayOf(
-//          PropTypes.exact({
-//            id: PropTypes.string.isRequired,
-//            name: PropTypes.string.isRequired,
-//          })
-//        ),
-//      })
-//    ),
-//  };

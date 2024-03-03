@@ -10,7 +10,9 @@ const Movies = () => {
    const location=useLocation();
    const [searchParams,setSearchParams]=useSearchParams();
    const movieName=searchParams.get('query');
+
 useEffect(()=>{
+
   if(!movieName){
     return;
   }
@@ -34,6 +36,7 @@ useEffect(()=>{
    const onFormSubmit = e =>{
     e.preventDeafult()
     setSearchParams({query});
+   
     setQuery('')
   }
 
