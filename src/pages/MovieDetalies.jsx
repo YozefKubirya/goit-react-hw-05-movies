@@ -2,8 +2,8 @@ import axios from "axios";
 
 import { useState, useEffect, Suspense } from "react";
 import { NavLink, Link, Outlet, useLocation, useParams } from "react-router-dom";
-// const BASE_URL=`https://api.themoviedb.org/3/movie`;
-// const API_KEY=`1751ed552758886790b5045f1f278379`
+const BASE_URL=`https://api.themoviedb.org/3/movie`;
+const API_KEY=`1751ed552758886790b5045f1f278379`
 const MOVIE_POSTER_LINK = 'https://image.tmdb.org/t/p/w500';
 export const MovieDetalies = () => {
    const [movie, setMovie] = useState(null);
@@ -15,7 +15,7 @@ export const MovieDetalies = () => {
       const handleFetch = async (id) => {
          try {
             const { data } = await axios.get(
-               `https://api.themoviedb.org/3/movie/${id}?api_key=1751ed552758886790b5045f1f278379&language=en-US`
+               `${BASE_URL}/${id}?api_key=${API_KEY}&language=en-US`
             );
             setMovie(data);
           
